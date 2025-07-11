@@ -23,29 +23,37 @@ idiom = [
     ["얌전한 고양이", "부뚜막에 먼저 올라간다"]
 ]
 
+
+#사진 참고
 score=0
 def qr(answer):
     img = qrcode.make(answer)
     img.show("정답")
 
-for total in range(5):
+total=0
+while True:
     front, back = random.choice(idiom)
     print(f"속담: \"{front}__\"")
-    answer=input("뒤 답을 작성하시오 ").strip()
-    if back == answer:
+    total+=1
+    con =input("계속할까요? y/n \n").lower().strip()
+    if con == "n": 
+        break
+    answer=input("답을 작성하시오 \n").strip()
+    
+if back == answer:
+    print("정답입니다!\n")
+    qr(answer)
+    score +=1
+else:
+    hint = back[0]
+    length = len(back)
+    print(f"오답입니다. 힌트 \"{hint}\"로 시작해요. 총 {length}글자 입니다\n")
+    answer = input("힌트를 보고 다시 입력하시오\n").strip()
+    if answer == back:
         print("정답입니다!\n")
-        qr(answer)
-        score +=1
+        score += 1
     else:
-        hint = back[0]
-        length = len(back)
-        print(f"오답입니다. 힌트 \"{hint}\"로 시작해요. 총 {length}글자 입니다")
-        answer = input("힌트를 보고 다시 입력하시오\n").strip()
-        if answer == back:
-            print("정답입니다!\n")
-            score += 1
-        else:
-            print(f"오답입니다. 정답은 \"{back}\"입니다\n")
+        print(f"오답입니다. 정답은 \"{back}\"입니다\n")
 
 print(f"총 {total+1}중 {score}맞췄음") #5번 돌려도 total은 4임.
 
