@@ -24,7 +24,7 @@ life = 3
 score = 0
 limit_time = 3
 
-while life !=0 or score <11:
+while life !=0 and score <11:
     ran_word = random.choice(words)
     print(ran_word)
     user_st = time.time()
